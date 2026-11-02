@@ -1,0 +1,12 @@
+{
+  "name": "veeam-assistant-portal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Browser chat front end for the Veeam Intelligence MCP server, with accounts and action approvals.",
+  "type": "module",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": { "node": ">=22" }
+}

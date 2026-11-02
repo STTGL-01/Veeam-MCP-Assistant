@@ -1,0 +1,38 @@
+.ulist{list-style:none;margin:0;padding:0}
+.urow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.urow:last-child{border-bottom:0}
+.uname{flex:1;min-width:160px}
+.uname strong{font-size:13.5px;font-weight:650}
+.uname span{display:block;font-size:11.5px;color:var(--faint)}
+.utags{display:flex;gap:6px;flex-wrap:wrap}
+.uacts{display:flex;gap:8px;flex-wrap:wrap}
+.panel{flex-basis:100%;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);padding:14px 16px;margin-top:4px}
+.panel h3{margin:0 0 4px;font-size:13px;font-weight:700}
+.panel p{margin:0 0 12px;font-size:12px;color:var(--muted)}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px;margin-bottom:12px}
+@media(max-width:640px){.checks{grid-template-columns:1fr}}
+.check{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;cursor:pointer}
+.check input{margin-top:3px;accent-color:var(--green)}
+.check small{display:block;color:var(--faint);font-size:11.5px}
+.panel .field{max-width:360px}
+.panel-acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.panel-acts .msg{margin:0;flex-basis:100%}
+.cover{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:4px 18px;font-size:12.5px}
+.cover div{padding:9px 0;border-bottom:1px solid var(--line)}
+.cover .cat strong{display:block;font-size:13px}
+.cover .cat span{font-size:11.5px;color:var(--faint)}
+.cover .names{display:flex;gap:6px;flex-wrap:wrap;align-content:center}
+@media(max-width:640px){.cover{grid-template-columns:1fr}.cover .cat{border-bottom:0;padding-bottom:0}}
+.test-out{margin-top:14px}
+.test-out ul{margin:6px 0 0;padding-left:20px;font-size:12.5px}
+.log{width:100%;border-collapse:collapse;font-size:12px}
+.log th{text-align:left;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);
+  font-weight:700;padding:0 10px 8px;border-bottom:1px solid var(--line)}
+.log td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
+.log td:first-child{white-space:nowrap;color:var(--muted)}
+.log-wrap{overflow-x:auto;max-height:460px;overflow-y:auto}
+.named-cover{margin-top:16px}
+.named-cover .urow{padding:8px 0}
+.test-one{margin-bottom:16px}
+.test-one:last-child{margin-bottom:0}
+.test-one .lede{margin:6px 0 0;font-size:11.5px}

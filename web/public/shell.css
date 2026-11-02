@@ -1,0 +1,74 @@
+/* Hamburger menu and change-password dialog. */
+
+.menu-wrap{position:relative;flex:none}
+
+.menu-btn{
+  width:38px;height:38px;border-radius:9px;
+  border:1px solid transparent;background:transparent;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  transition:background .16s ease,border-color .16s ease;
+}
+.menu-btn:hover{background:rgba(0,0,0,.06);border-color:var(--topbar-line)}
+[data-theme="dark"] .menu-btn:hover{background:rgba(255,255,255,.07)}
+.menu-btn:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.menu-btn span{
+  display:block;width:18px;height:2px;border-radius:2px;
+  background:var(--topbar-ink);transition:transform .2s ease,opacity .2s ease;
+}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+.menu{
+  position:absolute;top:calc(100% + 10px);left:0;z-index:80;
+  min-width:210px;padding:6px;
+  background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow-lift);
+  animation:menuIn .14s ease both;
+}
+@keyframes menuIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.menu[hidden]{display:none}
+.menu a,.menu button{
+  display:flex;align-items:center;gap:11px;width:100%;
+  padding:9px 11px;border:0;border-radius:8px;background:transparent;
+  font-family:inherit;font-size:13px;font-weight:600;color:var(--ink);
+  text-align:left;text-decoration:none;cursor:pointer;
+}
+.menu a:hover,.menu button:hover{background:var(--green-soft);color:var(--green-text)}
+.menu a:focus-visible,.menu button:focus-visible{outline:2px solid var(--green);outline-offset:-2px}
+.menu a.current{background:var(--green-soft);color:var(--green-text)}
+.menu .sep{height:1px;margin:5px 4px;background:var(--line)}
+.menu .ico{
+  flex:none;width:17px;height:17px;fill:none;stroke:currentColor;
+  stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.75;
+}
+
+@keyframes fbIn{from{opacity:0}to{opacity:1}}
+@keyframes fbCard{from{opacity:0;transform:translateY(10px) scale(.99)}to{opacity:1;transform:none}}
+
+/* ---- change password dialog ---- */
+.pw-veil{position:fixed;inset:0;z-index:95;background:var(--veil);
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  animation:fbIn .16s ease both}
+.pw-card{width:100%;max-width:420px;background:var(--surface);border-radius:var(--radius);
+  box-shadow:var(--shadow-lift);padding:24px;
+  animation:fbCard .2s cubic-bezier(.2,.8,.3,1) both}
+.pw-card h2{margin:0 0 4px;font-size:15px;font-weight:700;color:var(--ink)}
+.pw-card .who{margin:0 0 18px;font-size:12.5px;color:var(--muted)}
+.pw-field{margin-bottom:13px}
+.pw-field label{display:block;font-size:10.5px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.pw-field input{width:100%;font-family:inherit;font-size:13px;color:var(--ink);
+  background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:9px 11px;
+  transition:border-color .15s,box-shadow .15s}
+.pw-field input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px var(--green-soft)}
+.pw-msg{margin:0 0 13px;padding:10px 12px;border-radius:9px;font-size:12.5px;line-height:1.5;display:none}
+.pw-msg.show{display:block}
+.pw-msg.err{background:var(--red-soft);color:var(--red-ink)}
+.pw-msg.ok{background:var(--green-soft);color:var(--green-text)}
+.pw-foot{display:flex;gap:10px;align-items:center;margin-top:16px}
+.pw-foot .sp{flex:1}
+
+.menu .badge{margin-left:auto;min-width:20px;padding:1px 7px;border-radius:999px;background:var(--amber);
+  color:#3b2a00;font-size:11px;font-weight:700;text-align:center}
+.pw-card .ubtn{padding:9px 15px;font-size:12.5px}

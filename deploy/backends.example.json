@@ -1,0 +1,37 @@
+{
+  "servers": [
+    {
+      "id": "vi",
+      "label": "Veeam Intelligence",
+      "description": "Ask questions about your backup environment.",
+      "command": "node",
+      "args": ["/servers/vi-mcp/build/index.js"],
+      "cwd": "/servers/vi-mcp",
+      "env_file": "/etc/veeam-assistant/vi.env",
+      "mode": "question",
+      "enabled": true
+    },
+    {
+      "id": "vbr",
+      "label": "Veeam Backup & Replication",
+      "description": "Run any VBR operation, including deleting jobs and backups.",
+      "mode": "tools",
+      "enabled": true,
+      "parts": [
+        {
+          "command": "/servers/vbr-mcp/.venv/bin/python3",
+          "args": ["/servers/vbr-mcp/.venv/bin/vbr-mcp"],
+          "cwd": "/servers/vbr-mcp",
+          "env_file": "/etc/veeam-assistant/vbr.env"
+        },
+        {
+          "command": "node",
+          "args": ["/servers/vbr-extra/server.mjs"],
+          "cwd": "/servers/vbr-extra",
+          "env_file": "/etc/veeam-assistant/vbr-extra.env",
+          "hide_tools": []
+        }
+      ]
+    }
+  ]
+}

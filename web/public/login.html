@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in — Veeam Assistant</title>
+<link rel="stylesheet" href="/static/theme.css">
+<link rel="stylesheet" href="/static/login.css">
+</head>
+<body class="login">
+
+<span class="env-tag" id="envTag" hidden></span>
+
+<div class="brand">
+  <svg class="ps-logo veeam-logo" xmlns="http://www.w3.org/2000/svg" version="1.1"
+       viewBox="0 0 416.7 188.7" role="img" aria-label="Veeam">
+    <path class="fill-green" d="M52.9,66c-2,2-3.2,4.8-3.2,7.6v68.9h293c2.9,0,5.6-1.1,7.6-3.2l16.1-16.1c2-2,3.2-4.8,3.2-7.6V46.5H76.9c-2.9,0-5.6,1.1-7.6,3.2l-16.4,16.3Z"/>
+    <g>
+      <path class="fill-white" d="M94.6,117.6l-22.1-46.1h10s15.8,33.1,16.2,34.7h.2c.4-1.7,16.2-34.7,16.2-34.7h9.9l-22.1,46.2-8.3-.1h0Z"/>
+      <path class="fill-white" d="M167.8,98.1h-35.8c1.3,7.5,6.8,12.2,13.9,12.2,5.8,0,9.7-2.3,11.6-6.5h9.3c-2.8,8.8-10.7,14.8-20.9,14.8-13.4,0-23.3-9.8-23.3-24.1s9.7-24.1,23.3-24.1c12.1,0,22.1,10.4,22.1,24.1,0,1.4,0,2.2-.2,3.6ZM132.1,90.6h26.5c-.6-6.3-5.7-11.8-12.7-11.8-7.1-.1-12.4,4.6-13.8,11.8Z"/>
+      <path class="fill-white" d="M216.9,98.1h-35.8c1.3,7.5,6.8,12.2,13.9,12.2,5.8,0,9.7-2.3,11.6-6.5h9.3c-2.8,8.8-10.7,14.8-20.9,14.8-13.4,0-23.3-9.8-23.3-24.1s9.7-24.1,23.3-24.1c12.1,0,22.1,10.4,22.1,24.1,0,1.4,0,2.2-.2,3.6ZM181.2,90.6h26.5c-.6-6.3-5.7-11.8-12.7-11.8-7.1-.1-12.4,4.6-13.8,11.8Z"/>
+      <path class="fill-white" d="M267.1,94.5v23.1h-8l-.8-7.2c-3.5,5.3-9.8,8.2-15.4,8.2-12.6,0-22.2-10.1-22.2-24.1s10.3-24.1,23.4-24.1c12.1.1,23,8.7,23,24.1ZM258,94.5c0-10.2-6.7-15.8-13.9-15.8-7.9,0-14.3,6.3-14.3,15.8s5.9,15.8,14.3,15.8c7.1,0,13.9-5.9,13.9-15.8Z"/>
+      <path class="fill-white" d="M273.2,117.6v-27.3c0-11.5,7.4-19.8,18.9-19.8,9.3,0,14.2,6.2,14.9,8.4h.2c.7-2.2,5.6-8.4,14.9-8.4,11.5,0,18.9,8.3,18.9,19.8v27.3h-9v-26.6c0-7.5-3.4-12-10.2-12s-10.2,4.5-10.2,12.2v26.5h-9.1v-26.5c0-7.7-3.4-12.2-10.2-12.2s-10.2,4.5-10.2,12v26.6h-8.9Z"/>
+    </g>
+  </svg>
+  <div>
+    <h1 id="siteTitle">Veeam Assistant</h1>
+    <p id="siteSub">Veeam Intelligence</p>
+  </div>
+</div>
+
+<div class="card">
+  <div id="signin">
+    <h2>Sign in</h2>
+    <p class="sub">Use your assistant account. This is not your Veeam or Windows login.</p>
+    <p class="msg" id="msg" role="alert"></p>
+    <div class="field">
+      <label for="u">Username</label>
+      <input id="u" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" autofocus>
+    </div>
+    <div class="field">
+      <label for="p">Password</label>
+      <input id="p" type="password" autocomplete="current-password">
+    </div>
+    <button class="btn" id="loginBtn" type="button">Sign in</button>
+    <p class="switch">No account? <button type="button" id="toCreate">Request one</button></p>
+  </div>
+
+  <div id="create" hidden>
+    <h2>Request an account</h2>
+    <p class="sub">The administrator approves the request before you can sign in.</p>
+    <p class="msg" id="cmsg" role="alert"></p>
+    <div class="field">
+      <label for="cu">Username</label>
+      <input id="cu" type="text" autocomplete="username" autocapitalize="off" spellcheck="false">
+    </div>
+    <div class="field">
+      <label for="cp">Password</label>
+      <input id="cp" type="password" autocomplete="new-password">
+    </div>
+    <p class="rule" id="crule"></p>
+    <div class="field">
+      <label for="cp2">Repeat password</label>
+      <input id="cp2" type="password" autocomplete="new-password">
+    </div>
+    <button class="btn" id="createBtn" type="button">Send request</button>
+    <p class="switch">Already approved? <button type="button" id="toSignin">Sign in</button></p>
+  </div>
+
+  <div id="change" hidden>
+    <h2>Choose your own password</h2>
+    <p class="sub" id="changeSub">This account still has a temporary or default password. Set a new one to continue.</p>
+    <p class="msg" id="xmsg" role="alert"></p>
+    <div class="field">
+      <label for="xc">Current password</label>
+      <input id="xc" type="password" autocomplete="current-password">
+    </div>
+    <div class="field">
+      <label for="xn">New password</label>
+      <input id="xn" type="password" autocomplete="new-password">
+    </div>
+    <p class="rule" id="xrule"></p>
+    <div class="field">
+      <label for="xn2">Repeat new password</label>
+      <input id="xn2" type="password" autocomplete="new-password">
+    </div>
+    <button class="btn" id="changeBtn" type="button">Save and continue</button>
+    <p class="switch"><button type="button" id="changeOut">Sign out instead</button></p>
+  </div>
+</div>
+
+<p class="foot">Answers come from Veeam Intelligence on your backup server. Anything that would change
+  your Veeam environment waits for an approver before it runs.</p>
+
+<button class="theme-btn" id="themeBtn" type="button" aria-label="Switch between light and dark">
+  <svg class="icon-moon" viewBox="0 0 24 24"><path d="M20.5 14.6A8.5 8.5 0 1 1 9.4 3.5a7 7 0 0 0 11.1 11.1Z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.1"/>
+    <path d="M12 2.4v2.3M12 19.3v2.3M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.4 12h2.3M19.3 12h2.3M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+</button>
+
+<script src="/static/login.js"></script>
+</body>
+</html>

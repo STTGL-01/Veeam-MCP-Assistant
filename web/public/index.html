@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veeam Assistant</title>
+<link rel="stylesheet" href="/static/theme.css">
+<link rel="stylesheet" href="/static/shell.css">
+<link rel="stylesheet" href="/static/chat.css">
+</head>
+<body class="chat">
+
+<header class="topbar">
+  <div class="menu-wrap"></div>
+  <svg class="ps-logo veeam-logo" xmlns="http://www.w3.org/2000/svg" version="1.1"
+       viewBox="0 0 416.7 188.7" role="img" aria-label="Veeam">
+    <path class="fill-green" d="M52.9,66c-2,2-3.2,4.8-3.2,7.6v68.9h293c2.9,0,5.6-1.1,7.6-3.2l16.1-16.1c2-2,3.2-4.8,3.2-7.6V46.5H76.9c-2.9,0-5.6,1.1-7.6,3.2l-16.4,16.3Z"/>
+    <g>
+      <path class="fill-white" d="M94.6,117.6l-22.1-46.1h10s15.8,33.1,16.2,34.7h.2c.4-1.7,16.2-34.7,16.2-34.7h9.9l-22.1,46.2-8.3-.1h0Z"/>
+      <path class="fill-white" d="M167.8,98.1h-35.8c1.3,7.5,6.8,12.2,13.9,12.2,5.8,0,9.7-2.3,11.6-6.5h9.3c-2.8,8.8-10.7,14.8-20.9,14.8-13.4,0-23.3-9.8-23.3-24.1s9.7-24.1,23.3-24.1c12.1,0,22.1,10.4,22.1,24.1,0,1.4,0,2.2-.2,3.6ZM132.1,90.6h26.5c-.6-6.3-5.7-11.8-12.7-11.8-7.1-.1-12.4,4.6-13.8,11.8Z"/>
+      <path class="fill-white" d="M216.9,98.1h-35.8c1.3,7.5,6.8,12.2,13.9,12.2,5.8,0,9.7-2.3,11.6-6.5h9.3c-2.8,8.8-10.7,14.8-20.9,14.8-13.4,0-23.3-9.8-23.3-24.1s9.7-24.1,23.3-24.1c12.1,0,22.1,10.4,22.1,24.1,0,1.4,0,2.2-.2,3.6ZM181.2,90.6h26.5c-.6-6.3-5.7-11.8-12.7-11.8-7.1-.1-12.4,4.6-13.8,11.8Z"/>
+      <path class="fill-white" d="M267.1,94.5v23.1h-8l-.8-7.2c-3.5,5.3-9.8,8.2-15.4,8.2-12.6,0-22.2-10.1-22.2-24.1s10.3-24.1,23.4-24.1c12.1.1,23,8.7,23,24.1ZM258,94.5c0-10.2-6.7-15.8-13.9-15.8-7.9,0-14.3,6.3-14.3,15.8s5.9,15.8,14.3,15.8c7.1,0,13.9-5.9,13.9-15.8Z"/>
+      <path class="fill-white" d="M273.2,117.6v-27.3c0-11.5,7.4-19.8,18.9-19.8,9.3,0,14.2,6.2,14.9,8.4h.2c.7-2.2,5.6-8.4,14.9-8.4,11.5,0,18.9,8.3,18.9,19.8v27.3h-9v-26.6c0-7.5-3.4-12-10.2-12s-10.2,4.5-10.2,12.2v26.5h-9.1v-26.5c0-7.7-3.4-12.2-10.2-12.2s-10.2,4.5-10.2,12v26.6h-8.9Z"/>
+    </g>
+  </svg>
+  <div class="topbar-text">
+    <h1>Veeam Assistant</h1>
+    <p>Ask Veeam Intelligence about your backup environment</p>
+  </div>
+  <div class="who">
+    <span class="name" id="whoName"></span>
+    <span class="env-tag" id="envTag" hidden></span>
+  </div>
+</header>
+
+<main id="scroller">
+  <div class="thread" id="thread">
+    <section class="intro" id="intro" hidden>
+      <h2>What do you want to know?</h2>
+      <p>Questions go to Veeam Intelligence on your backup server. Answers can take a minute
+        while it gathers data.</p>
+      <div class="starters" id="starters"></div>
+    </section>
+
+    <section class="intro" id="opsIntro" hidden>
+      <h2 id="opsTitle">Run an operation</h2>
+      <p id="opsLede">This server offers specific operations rather than a chat. Pick one, fill in what it needs,
+        and anything that changes or removes something goes to an approver first.</p>
+      <button class="ubtn primary" id="opsOpen" type="button">Browse operations</button>
+    </section>
+  </div>
+</main>
+
+<div class="composer">
+  <div class="composer-inner">
+    <p class="msg" id="askMsg" role="alert"></p>
+    <div class="picker">
+      <label for="backend">Server</label>
+      <select id="backend" aria-label="Which Veeam server to use"></select>
+      <span class="picker-note" id="backendNote"></span>
+      <button type="button" class="ubtn" id="toolsBtn" hidden>Operations…</button>
+    </div>
+    <div class="box">
+      <textarea id="question" rows="1" maxlength="4000" placeholder="Ask about jobs, repositories, restore points, licenses…"
+        aria-label="Your question"></textarea>
+      <button class="send" id="sendBtn" type="button">Ask</button>
+    </div>
+    <div class="hint">
+      <span class="grow">Enter sends. Shift and Enter starts a new line.</span>
+      <button type="button" id="clearBtn" hidden>Clear history</button>
+    </div>
+  </div>
+</div>
+
+<button class="theme-btn" id="themeBtn" type="button" aria-label="Switch between light and dark">
+  <svg class="icon-moon" viewBox="0 0 24 24"><path d="M20.5 14.6A8.5 8.5 0 1 1 9.4 3.5a7 7 0 0 0 11.1 11.1Z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.1"/>
+    <path d="M12 2.4v2.3M12 19.3v2.3M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.4 12h2.3M19.3 12h2.3M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+</button>
+
+<script src="/static/shell.js"></script>
+<script src="/static/markdown.js"></script>
+<script src="/static/ops.js"></script>
+<script src="/static/chat.js"></script>
+</body>
+</html>

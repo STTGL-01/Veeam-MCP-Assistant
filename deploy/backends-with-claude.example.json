@@ -1,0 +1,63 @@
+{
+  "servers": [
+    {
+      "id": "vi",
+      "label": "Veeam Intelligence",
+      "description": "Ask questions about your backup environment.",
+      "command": "node",
+      "args": [
+        "/servers/vi-mcp/build/index.js"
+      ],
+      "cwd": "/servers/vi-mcp",
+      "env_file": "/etc/veeam-assistant/vi.env",
+      "mode": "question",
+      "enabled": true
+    },
+    {
+      "id": "vbr",
+      "label": "Veeam Backup & Replication",
+      "description": "Ask questions or run any VBR operation, including deleting jobs and backups.",
+      "mode": "tools",
+      "enabled": true,
+      "parts": [
+        {
+          "command": "/servers/vbr-mcp/.venv/bin/python3",
+          "args": [
+            "/servers/vbr-mcp/.venv/bin/vbr-mcp"
+          ],
+          "cwd": "/servers/vbr-mcp",
+          "env_file": "/etc/veeam-assistant/vbr.env"
+        },
+        {
+          "command": "node",
+          "args": [
+            "/servers/vbr-extra/server.mjs"
+          ],
+          "cwd": "/servers/vbr-extra",
+          "env_file": "/etc/veeam-assistant/vbr-extra.env",
+          "hide_tools": []
+        }
+      ],
+      "agent": {
+        "model": "claude-sonnet-5-5",
+        "access": "read-write",
+        "max_steps": 15,
+        "max_tokens": 4096,
+        "history_turns": 4,
+        "parts": [
+          1
+        ],
+        "allow_tools": [
+          "find_jobs",
+          "find_backups",
+          "delete_backup",
+          "delete_job",
+          "rest_*flr*",
+          "rest_get_all_creds",
+          "rest_get_all_managed_servers"
+        ],
+        "instructions": "File restores: if the person has not said which machine to restore to, as VBR names it, and which folder, ask them. Steps: find the restore point, start a file restore, browse to confirm the path, restore the items, and always unmount the file system afterwards. A file restore cannot be downloaded to the person's own computer."
+      }
+    }
+  ]
+}
