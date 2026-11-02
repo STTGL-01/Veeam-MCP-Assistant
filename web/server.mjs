@@ -1,4 +1,4 @@
-// Veeam Assistant portal.
+// Veeam-MCP-Assistant portal.
 //
 // Browser -> Nginx (HTTPS) -> this server on 127.0.0.1:3000
 //   -> Veeam MCP server child process over STDIO -> Veeam Intelligence on VBR
@@ -31,7 +31,7 @@ const config = {
   port: int(env.PORT, 3000),
   host: env.HOST || '0.0.0.0',
   dataDir: env.DATA_DIR || path.join(HERE, 'data'),
-  siteTitle: env.SITE_TITLE || 'Veeam Assistant',
+  siteTitle: env.SITE_TITLE || 'Veeam-MCP-Assistant',
   siteSubtitle: env.SITE_SUBTITLE || 'Veeam Intelligence',
   cookieSecure: bool(env.COOKIE_SECURE, true),
   publicOrigins: String(env.PUBLIC_ORIGIN || '').split(',').map((s) => s.trim().replace(/\/+$/, '')).filter(Boolean),

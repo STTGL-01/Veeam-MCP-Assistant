@@ -1,8 +1,8 @@
-# Veeam Assistant v1.0.0
+# Veeam-MCP-Assistant v1.0.0
 
 **A web front end for Veeam's MCP servers.** Sign in from a browser, ask Veeam Intelligence questions, run Veeam Backup & Replication operations, and make sure a second person approves anything that changes or deletes something.
 
-> **Not an official or supported Veeam product.** Veeam Assistant is a community project, provided as-is, with no warranty and no support from Veeam. **Try it in a lab first**, and read *What it can and cannot do* below before you point it at a production backup server.
+> **Not an official or supported Veeam product.** Veeam-MCP-Assistant is a community project, provided as-is, with no warranty and no support from Veeam. **Try it in a lab first**, and read *What it can and cannot do* below before you point it at a production backup server.
 
 ## What it does
 
@@ -26,7 +26,7 @@ Before you rely on `vbr-mcp`, read the safety section in [its own README](https:
 ## How it works
 
 ```text
-Browser ──HTTPS──► Nginx ──► Veeam Assistant website (Docker)
+Browser ──HTTPS──► Nginx ──► Veeam-MCP-Assistant website (Docker)
                                accounts · approvals · activity log
                                    │
                                    ├── vi-mcp ─────► Veeam Intelligence on VBR (web UI, port 443)
@@ -48,7 +48,7 @@ Browser ──HTTPS──► Nginx ──► Veeam Assistant website (Docker)
 - **With Claude on, the setup in this guide is read-write by default**: Claude can *ask* for changes and deletions, and each one still waits for an approver. Part O shows how to make it read-only.
 - **Everything runs as the VBR accounts you configure.** Roles on the website do not become separate VBR permissions. Keep VBR's own four-eyes authorization on for destructive operations.
 
-A fuller summary, with the limits explained, is in `docs/Veeam-Assistant-Summary.docx` (also as Markdown).
+A fuller summary, with the limits explained, is in `docs/Veeam-MCP-Assistant-Summary.docx` (also as Markdown).
 
 ## Before you start
 
@@ -91,7 +91,7 @@ A fuller summary, with the limits explained, is in `docs/Veeam-Assistant-Summary
 
 ---
 
-## Installation guide (Veeam Assistant v1.0.0)
+## Installation guide (Veeam-MCP-Assistant v1.0.0)
 
 ## What is in this repository
 
@@ -292,7 +292,7 @@ scp .\swagger.json you@linux-server:~/
 
 ```bash
 cd ~
-git clone https://github.com/STTGL-01/Veeam-MCP-Assistant.git veeam-assistant
+git clone [FILL-IN: repository URL] veeam-assistant
 ls ~/veeam-assistant
 ```
 
@@ -390,7 +390,7 @@ No changes needed. Leave `PUBLIC_ORIGIN` empty: the website then accepts whateve
 
 ```bash
 sudo tee /etc/veeam-assistant/app.env > /dev/null <<'EOF'
-SITE_TITLE=Veeam Assistant
+SITE_TITLE=Veeam-MCP-Assistant
 SITE_SUBTITLE=Veeam Intelligence
 COOKIE_SECURE=true
 SESSION_IDLE_MINUTES=60
@@ -651,7 +651,7 @@ A correct start looks like this, with **no** lines containing `EACCES` or `does 
 
 ```text
 [backends] 2 MCP server(s) configured: vi, vbr (2 parts)
-[startup] Veeam Assistant portal 1.0.0 listening on 0.0.0.0:3000
+[startup] Veeam-MCP-Assistant portal 1.0.0 listening on 0.0.0.0:3000
 [startup] Data directory: /data. Secure cookies: true.
 ```
 
@@ -1046,7 +1046,7 @@ cat /etc/veeam-assistant/backends.json
 | `/opt/veeam-mcp/vi-mcp`, `/opt/veeam-mcp/vbr-mcp` | Veeam's MCP servers, built in step 16 |
 | `/opt/veeam-mcp/vbr-extra/server.mjs` | The REST API server |
 | `/opt/veeam-mcp/vbr-extra/swagger.json` | Veeam's REST API definition |
-| `~/veeam-assistant/web` | The website source (Veeam Assistant v1.0.0) |
+| `~/veeam-assistant/web` | The website source (Veeam-MCP-Assistant v1.0.0) |
 | `~/veeam-assistant/mcp-extra/vbr-extra/` | The REST API server |
 | `~/veeam-assistant/deploy/*.example` | Example settings files, one per step in Part E |
 | `~/veeam-assistant/docs/` | A summary of what this is and its limits |
@@ -1149,7 +1149,7 @@ You must see:
 ```text
 [backends] 2 MCP server(s) configured: vi, vbr (2 parts, answers questions with claude-sonnet-5-5)
 [startup] Claude API key found; written questions are on for agent servers.
-[startup] Veeam Assistant portal 1.0.0 listening on 0.0.0.0:3000
+[startup] Veeam-MCP-Assistant portal 1.0.0 listening on 0.0.0.0:3000
 ```
 
 If it says `ANTHROPIC_API_KEY is not set`, go back to step O1.
@@ -1230,7 +1230,7 @@ If all four are right and Claude still refuses:
 2. Look at the line under its answer, for example *Answered by claude-sonnet-5-5 (read-write; 60 operations available, 25 of them can change or delete things)*. The first number should be at least 53 (vbr-mcp's 49 and the four combined operations). A lower number means the deletion operations were not in its list; **Test connections** then names any `allow_tools` entry that matched nothing.
 3. A line saying `read-only` there means `"access"` is `"read-only"` (part 3 above).
 
-The line under every Claude answer, and the *Access* and *unmatched* lines in **Test connections**, need Veeam Assistant **v1.0.0**. If they are missing, the running website was built from an older copy: rebuild the image (step 14) and recreate the container (step O3).
+The line under every Claude answer, and the *Access* and *unmatched* lines in **Test connections**, need Veeam-MCP-Assistant **v1.0.0**. If they are missing, the running website was built from an older copy: rebuild the image (step 14) and recreate the container (step O3).
 
 ### Switch between read-write and read-only
 

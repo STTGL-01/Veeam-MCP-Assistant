@@ -1,4 +1,4 @@
-# Veeam Assistant portal.
+# Veeam-MCP-Assistant portal.
 #
 # Carries both runtimes, because the MCP servers it starts are written in
 # different languages: vi-mcp is Node.js, vbr-mcp is Python.

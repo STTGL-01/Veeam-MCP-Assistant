@@ -1,5 +1,5 @@
 #!/bin/sh
-# (Re)create the Veeam Assistant web container.
+# (Re)create the Veeam-MCP-Assistant web container.
 #
 #   sudo sh ~/veeam-assistant/deploy/run-container.sh               # uses veeam-assistant:1.0.0
 #   sudo sh ~/veeam-assistant/deploy/run-container.sh veeam-assistant:1.0.0

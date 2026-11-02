@@ -1,4 +1,4 @@
-// vbr-extra 2.0: an MCP server (STDIO) for the Veeam Assistant portal that
+// vbr-extra 2.0: an MCP server (STDIO) for the Veeam-MCP-Assistant portal that
 // offers the whole VBR REST API.
 //
 // Every operation in Veeam's own OpenAPI definition (swagger.json) becomes an
