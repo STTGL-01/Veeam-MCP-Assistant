@@ -103,7 +103,7 @@
 
     link(menu, "/", "Ask Veeam Intelligence", "chat");
     if (s.approver) link(menu, "/approvals", "Approvals", "check", s.waiting_approvals);
-    if (s.role === "admin") link(menu, "/admin", "User accounts", "users", s.pending_accounts);
+    if (s.role === "admin") link(menu, "/admin", "Management", "users", s.pending_accounts);
     menu.appendChild(el("div", "sep"));
     action(menu, "Change password", "key", function () { openPassword(s.username); });
     action(menu, "Sign out (" + s.username + ")", "out", signOut);

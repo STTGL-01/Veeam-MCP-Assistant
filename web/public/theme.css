@@ -39,8 +39,8 @@ body{margin:0;min-height:100vh;font-family:Inter,"Segoe UI",Arial,sans-serif;
 .topbar{background:var(--topbar);color:var(--topbar-ink);padding:18px 28px;
   display:flex;align-items:center;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--topbar-line)}
 .ps-logo{display:block;width:150px;max-width:60%;height:auto;flex:none}
-.veeam-logo .fill-green{fill:var(--green-bright)}
-.veeam-logo .fill-white{fill:#fff}
+.vam-logo .vam-badge{fill:var(--green-bright)}
+.vam-logo .vam-letters{fill:none;stroke:#fff;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
 .topbar-text{flex:1 1 240px;min-width:0}
 .topbar-text h1{margin:0;font-size:17px;font-weight:700;letter-spacing:.01em}
 .topbar-text p{margin:2px 0 0;font-size:13px;color:var(--topbar-sub)}
