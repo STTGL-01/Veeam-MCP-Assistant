@@ -292,7 +292,7 @@ scp .\swagger.json you@linux-server:~/
 
 ```bash
 cd ~
-git clone https://github.com/STTGL-01/Veeam-MCP-Assistant.git veeam-assistant
+git clone [FILL-IN: repository URL] veeam-assistant
 ls ~/veeam-assistant
 ```
 
@@ -698,7 +698,7 @@ On Windows, go to `https://` followed by your site name. There should be no cert
 
 ### Step 33 — Test both servers
 
-Menu (three lines, top left) → **User accounts** → **MCP servers** → **Test connections**.
+Menu (three lines, top left) → **Management** → **MCP servers** → **Test connections**.
 
 | Server | Expected |
 |---|---|
@@ -768,12 +768,12 @@ If you turned Claude on (Part J), it can run these three steps for you. Name the
 
 1. Open a **private window** (Ctrl+Shift+N) and go to the site.
 2. Click **Request one**, and pick a username and a password of at least 12 characters.
-3. In your **normal** window, as admin: menu → **User accounts** → **Awaiting approval** → **Approve**.
+3. In your **normal** window, as admin: menu → **Management** → **Awaiting approval** → **Approve**.
 4. Use the private window (new account) to request changes, and the normal window (admin) to approve them under **Approvals**.
 
 ### Step 38 — Approve other people
 
-They request accounts themselves from the sign-in page. Approve them under **User accounts** → **Awaiting approval**.
+They request accounts themselves from the sign-in page. Approve them under **Management** → **Awaiting approval**.
 
 ### Step 39 — Choose who approves what
 
@@ -893,7 +893,7 @@ python3 -m json.tool /etc/veeam-assistant/backends.json > /dev/null && echo "bac
 | `claude-haiku-5-5` | Cheapest (from $0.10 / $0.50 per million). Fine for simple lookups. |
 | `claude-opus-5-5` | Most capable, costs more. |
 
-To change the model later, put the new name in this command, run it, then use **Reload server list** on the User accounts page:
+To change the model later, put the new name in this command, run it, then use **Reload server list** on the Management page:
 
 ```bash
 sudo sed -i 's/"model": "[^"]*"/"model": "claude-haiku-5-5"/' /etc/veeam-assistant/backends.json
@@ -925,7 +925,7 @@ To restore a file through Claude, name the machine as VBR names it and the folde
 sudo sh ~/veeam-assistant/deploy/run-container.sh veeam-assistant:1.0.0
 ```
 
-A change to `backends.json` alone only needs **Reload server list** on the User accounts page.
+A change to `backends.json` alone only needs **Reload server list** on the Management page.
 
 **Update Veeam's MCP servers:**
 
@@ -1154,7 +1154,7 @@ You must see:
 
 If it says `ANTHROPIC_API_KEY is not set`, go back to step O1.
 
-**Step O4 — Check in the browser.** Press **F5**. Menu → **User accounts** → **MCP servers** → **Test connections**. Veeam Backup & Replication must show a green line like this:
+**Step O4 — Check in the browser.** Press **F5**. Menu → **Management** → **MCP servers** → **Test connections**. Veeam Backup & Replication must show a green line like this:
 
 ```text
 Written questions: Claude model claude-sonnet-5-5 is available. Access: read-write.
@@ -1234,7 +1234,7 @@ The line under every Claude answer, and the *Access* and *unmatched* lines in **
 
 ### Switch between read-write and read-only
 
-Switching is a change to `backends.json` only, so **no restart is needed**: use **Reload server list** on the User accounts page afterwards.
+Switching is a change to `backends.json` only, so **no restart is needed**: use **Reload server list** on the Management page afterwards.
 
 **Make Claude read-only.** Claude then keeps answering questions, but is given only operations that read:
 
