@@ -104,9 +104,18 @@ for srcdir in "$SRC"/servers/*/; do
     echo "  $name  PROBLEM  was not copied to $OUT"; problems=1; continue
   fi
   if [ -d "${d}.venv/bin" ]; then
-    # A Python server is started through its own interpreter.
-    if [ -x "${d}.venv/bin/$name" ] && [ -x "${d}.venv/bin/python3" ]; then
-      echo "  $name  OK  Python  /servers/$name/.venv/bin/$name"
+    # A Python server is started through its own interpreter. Its python3 is a
+    # link to the interpreter inside the website image, so on this host the link
+    # can look broken: check that the files exist, then that Python really starts
+    # inside the image, which is where the website runs it.
+    py="${d}.venv/bin/python3"
+    if { [ -e "${d}.venv/bin/$name" ] || [ -L "${d}.venv/bin/$name" ]; } && { [ -e "$py" ] || [ -L "$py" ]; }; then
+      if docker run --rm -v "$OUT:/servers:ro" --entrypoint "/servers/$name/.venv/bin/python3" "$PORTAL_IMAGE" -c "import sys" >/dev/null 2>&1; then
+        echo "  $name  OK  Python  /servers/$name/.venv/bin/$name"
+      else
+        echo "  $name  PROBLEM  built, but its Python does not start inside $PORTAL_IMAGE. Check step 15, then rebuild with step 16."
+        problems=1
+      fi
     else
       echo "  $name  PROBLEM  built, but .venv/bin/$name or .venv/bin/python3 is missing. Found:"
       ls "${d}.venv/bin" | sed 's/^/        /'
@@ -130,6 +139,6 @@ echo
 if [ "$problems" -eq 0 ]; then
   echo "All servers are in place. Next: README step 18."
 else
-  echo "At least one server has a PROBLEM. Send me the lines above."
+  echo "At least one server has a PROBLEM. Share the lines above when you ask for help."
   exit 1
 fi
