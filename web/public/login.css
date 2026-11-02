@@ -2,7 +2,7 @@ body.login{display:flex;flex-direction:column;align-items:center;justify-content
 .login .env-tag{text-transform:none;letter-spacing:.04em;position:fixed;top:20px;right:22px;color:var(--faint);border-color:var(--line);background:var(--surface)}
 @media(max-width:520px){.login .env-tag{top:12px;right:12px}}
 .brand{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:22px}
-.brand .ps-logo{width:170px;max-width:none}
+.brand .ps-logo{width:auto;height:132px;max-width:none}
 .brand h1{margin:0;font-size:17px;font-weight:700;letter-spacing:.01em;text-align:center}
 .brand p{margin:2px 0 0;font-size:13px;color:var(--muted);text-align:center}
 .card{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--line);
