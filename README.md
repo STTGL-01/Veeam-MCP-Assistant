@@ -294,7 +294,7 @@ scp .\swagger.json you@linux-server:~/
 
 ```bash
 cd ~
-git clone [FILL-IN: repository URL] veeam-assistant
+git clone https://github.com/STTGL-01/Veeam-MCP-Assistant.git veeam-assistant
 ls ~/veeam-assistant
 ```
 
