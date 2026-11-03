@@ -891,8 +891,8 @@ python3 -m json.tool /etc/veeam-assistant/backends.json > /dev/null && echo "bac
 
 | Model name | When to use it |
 |---|---|
-| `claude-sonnet-5-5` | **Recommended.** Reliable across several steps. $2 per million input tokens, $10 per million output. |
-| `claude-haiku-5-5` | Cheapest (from $0.10 / $0.50 per million). Fine for simple lookups. |
+| `claude-sonnet-5-5` | **Recommended.** Reliable across several steps. |
+| `claude-haiku-5-5` | Cheapest, fine for simple lookups. |
 | `claude-opus-5-5` | Most capable, costs more. |
 
 To change the model later, put the new name in this command, run it, then use **Reload server list** on the Management page:
