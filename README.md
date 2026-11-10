@@ -1,6 +1,6 @@
 <p align="center"><img src="web/public/vam-logo.png" alt="VAM" width="160"></p>
 
-# Veeam-MCP-Assistant v1.0.0
+# Veeam-MCP-Assistant (VAM) v1.0.0
 
 **A web front end for Veeam's MCP servers.** Sign in from a browser, ask Veeam Intelligence questions, run Veeam Backup & Replication operations, and make sure a second person approves anything that changes or deletes something.
 
